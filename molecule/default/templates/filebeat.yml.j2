@@ -1,0 +1,28 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - "/opt/applis/SIMPLE-SPRINGBOOT-APP/logs/*.log"
+    fields:
+      app: SIMPLE-SPRINGBOOT-APP
+    fields_under_root: true
+
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
+output.logstash:
+  enabled: true
+  # The Logstash hosts
+  hosts: ["localhost:5044"]
+
+  # Number of workers per Logstash host.
+  #worker: 1
+
+  # Optional load balance the events between the Logstash hosts
+  #loadbalance: true
+
+  # Optional index name. The default index name depends on the each beat.
+  # For Packetbeat, the default is set to packetbeat, for Topbeat
+  # top topbeat and for Filebeat to filebeat.
+  #index: filebeat
+
+# logging.level: debug

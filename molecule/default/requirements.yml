@@ -2,3 +2,5 @@
 - src: geerlingguy.java
 - src: geerlingguy.elasticsearch
 - src: geerlingguy.logstash
+- src: orachide.springboot-service
+- src: graylog2.graylog-ansible-role
