@@ -6,9 +6,9 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: filebeat_instance_centos7
+  - name: filebeat_centos7_$TOX_ENVNAME
     image: centos:7
-    privileged: True
+    privileged: true
     command: '/sbin/init'
     cap_add: ['SYS_ADMIN', 'SETPCAP']
     volumes:
@@ -17,12 +17,22 @@ platforms:
       - 0.0.0.0:9001:9000/tcp
       - 0.0.0.0:8086:8080/tcp
       - 0.0.0.0:3001:3000/tcp
+  - name: filebeat_ubuntu18_$TOX_ENVNAME
+    image: solita/ubuntu-systemd
+    command: /sbin/init
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
   name: default
+  converge_sequence:
+    - create
+    - prepare
+    - converge
 verifier:
   name: testinfra
   lint:
